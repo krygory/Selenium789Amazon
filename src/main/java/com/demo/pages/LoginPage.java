@@ -47,7 +47,7 @@ public class LoginPage extends BasePage {
     }
 
     //methods to get error Message
-    
+
     public String getLoginErrorMessage() {
         return find(incorrectLogin).getText();
     }

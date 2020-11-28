@@ -7,10 +7,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class BasePage {
     protected WebDriver driver;
+    protected WebDriverWait wait;
 
-    public BasePage (WebDriver driver) { this.driver = driver;}
+
+    public BasePage (WebDriver driver) {
+        this.driver = driver;
+        wait = new WebDriverWait(driver, 10);}
 
 
     protected WebElement find (By locator) {
@@ -34,10 +42,47 @@ public abstract class BasePage {
         }
     }
 
+
+    protected Boolean elementsAreDisplayed(By[] elementsArray) {
+        boolean elementsDisplayed = false;
+        List<By> elmnts = new ArrayList<By>(
+                new ArrayList<By>(Arrays.asList(elementsArray)));
+
+        for (By elmnt: elmnts){
+            waitUntilElementPresent(elmnt);
+            //Highlighter.highlightElement(driver, elmnt);
+            elementsDisplayed = isDisplayed(elmnt);
+        }
+        return elementsDisplayed;
+    }
+
+
+    //get URL
+
+    protected String currentURL() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+        }
+        return driver.getCurrentUrl();
+    }
+
+
+    //wait types
+
+
     protected void waitUntilElementClickable (By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
+    protected void waitUntilElementVisible (By locator) {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+
+    protected void waitUntilElementPresent (By locator) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
 
 
 }

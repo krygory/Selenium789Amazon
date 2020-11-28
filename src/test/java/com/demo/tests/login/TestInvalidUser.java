@@ -4,6 +4,7 @@ import com.demo.pages.LandingPage;
 import com.demo.tests.base.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
+import org.testng.annotations.Parameters;
 
 public class TestInvalidUser extends BaseTest {
 

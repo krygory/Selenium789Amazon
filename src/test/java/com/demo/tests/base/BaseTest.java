@@ -15,7 +15,7 @@ public class BaseTest {
 
     protected final String AUT_URL = "https://www.amazon.com",
 
-                         VALID_USERNAME = "testamazon@gmail.com",
+                         VALID_USERNAME = "999***@gmail.com",
                          VALID_PASSWORD = "abcd1234",
                          INVALID_USERNAME = "invalidtest@gmail.com",
                          INVALID_PASSWORD = "invalidpassword";
