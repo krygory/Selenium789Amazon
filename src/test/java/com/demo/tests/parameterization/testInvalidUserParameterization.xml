@@ -37,7 +37,7 @@
     <!--#3 *******************************************************************-->
     <test name="testInvalidUserPasswordGetsErrorMessage(Invalid Password)">
 
-        <parameter name="valid_email" value="999orb@gmail.com"/>
+        <parameter name="valid_email" value="test@gmail.com"/>
         <parameter name="invalid_password" value="invalid007"/>
         <parameter name="errorMessagePassword" value="Your password is incorrect"/>
 
@@ -53,8 +53,8 @@
     <!--#4 *******************************************************************-->
     <test name="testInvalidUserPasswordGetsErrorMessage(Uppercase letter password))">
 
-        <parameter name="valid_email" value="999orb@gmail.com"/>
-        <parameter name="invalid_password" value="QWER_1234"/>
+        <parameter name="valid_email" value="test@gmail.com"/>
+        <parameter name="invalid_password" value="ABCD1234"/>
         <parameter name="errorMessagePassword" value="Your password is incorrect"/>
 
         <classes>
