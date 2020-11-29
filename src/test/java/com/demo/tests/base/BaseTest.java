@@ -3,8 +3,7 @@ package com.demo.tests.base;
 import com.demo.pages.LandingPage;
 import com.demo.pages.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -18,13 +17,15 @@ public class BaseTest {
                          VALID_USERNAME = "999***@gmail.com",
                          VALID_PASSWORD = "abcd1234",
                          INVALID_USERNAME = "invalidtest@gmail.com",
-                         INVALID_PASSWORD = "invalidpassword";
+                         INVALID_PASSWORD = "invalidpassword",
+                         LOGIN_ERROR = "We cannot find an account with that email address",
+                         PASSWORD_INVALID = "Your password is incorrect";
 
 
     protected LoginPage loginPage;
     protected LandingPage landingPage;
 
-    @Before
+    @BeforeClass
     public void setUp () {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -35,7 +36,7 @@ public class BaseTest {
         landingPage = new LandingPage(driver);
     }
 
-    @After
+    @AfterClass
     public void tearDown () {
         driver.quit();
     }
