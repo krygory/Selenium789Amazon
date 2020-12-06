@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -23,6 +25,10 @@ public abstract class BasePage {
 
     protected WebElement find (By locator) {
         return driver.findElement(locator);
+    }
+
+    protected List<WebElement> findAll (By locator) {
+        return driver.findElements(locator);
     }
 
     protected void type(String text, By locator) {
@@ -69,7 +75,9 @@ public abstract class BasePage {
 
 
     //wait types
-
+    protected void waitFor (int timeUnitSec){
+        driver.manage().timeouts().implicitlyWait(timeUnitSec, TimeUnit.SECONDS);
+    }
 
     protected void waitUntilElementClickable (By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -83,6 +91,28 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
+
+
+    //custom method
+
+    protected void waitUntilHistoryElementIncrease (By locator) {
+        wait.until(historyElementIncreaseInNumber(locator)
+        );
+    }
+
+    private ExpectedCondition<Boolean> historyElementIncreaseInNumber(By locator) {
+        return new ExpectedCondition<Boolean>() {
+            private int initialCount = findAll(locator).size();
+
+
+            @Override
+            public Boolean apply(WebDriver input) {
+                int currentCount = findAll(locator).size();
+                return currentCount > initialCount;
+            }
+        };
+
+    }
 
 
 }

@@ -3,6 +3,7 @@
 
 <suite name="TestSuite" thread-count="2">
 
+<!--These errorMessages can be used on the suite level to pass in values for the suite-->
     <parameter name="errorMessageEmail" value="We cannot find an account with that email address"/>
     <parameter name="errorMessagePassword" value="Your password is incorrect"/>
 
@@ -37,7 +38,7 @@
     <!--#3 *******************************************************************-->
     <test name="testInvalidUserPasswordGetsErrorMessage(Invalid Password)">
 
-        <parameter name="valid_email" value="test@gmail.com"/>
+        <parameter name="valid_email" value="999test@gmail.com"/>
         <parameter name="invalid_password" value="invalid007"/>
         <parameter name="errorMessagePassword" value="Your password is incorrect"/>
 
@@ -53,7 +54,7 @@
     <!--#4 *******************************************************************-->
     <test name="testInvalidUserPasswordGetsErrorMessage(Uppercase letter password))">
 
-        <parameter name="valid_email" value="test@gmail.com"/>
+        <parameter name="valid_email" value="999test@gmail.com"/>
         <parameter name="invalid_password" value="ABCD1234"/>
         <parameter name="errorMessagePassword" value="Your password is incorrect"/>
 
