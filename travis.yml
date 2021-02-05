@@ -1,0 +1,63 @@
+dist: trusty
+
+language: java
+
+jdk:
+  - openjdk11
+
+install:
+  - mvn -N io.takari:maven:wrapper
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+sudo: false
+
+env:
+  global:
+    BROWSERSTACK_USERNAME: $BSTACK_USERNAME
+    BROWSERSTACK_ACCESS_KEY: $BSTACK_ACCESS_KEY
+
+
+script: ./mvnw clean install
+
+
+jobs:
+  include:
+    - stage: test
+      script: ./mvnw clean test
+
+before_deploy:
+  - pip install --user awscli
+  - ls -al
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: $S3_APP_ENV_BUCKET
+    region: us-east-1
+    skip_cleanup: true
+    acl: public_read
+    local_dir: target
+    cache_control: 'max-age=0'
+    on:
+      all_branches: true
+
+
+addons:
+  browserstack:
+    forcelocal: true
+    username: BROWSERSTACK_USERNAME
+    access_key: BROWSERSTACK_ACCESS_KEY
+
+notifications:
+  email: kryptoniteqa@gmail.com
+  webhooks:
+    - https://outlook.office.com/webhook/c6a29c23-0a31-4b74-b45f-53a686c03760@a3d021a8-6a5d-48bf-91d3-bb5992ad5ad4/TravisCI/7eee560f018342e08be7f4379fbfab80/77b85bee-d170-48b4-8a25-8f8edf9e3841
+
+
+on_success: always
+on_failure: always
+on_start: always
+on_cancel: always
+on_error: always
+
