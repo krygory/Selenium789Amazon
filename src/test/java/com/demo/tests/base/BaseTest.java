@@ -20,7 +20,7 @@ public class BaseTest {
     public void setUp () {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.get(FinalValues.AUT_URL.getElement());
 
         loginPage = new LoginPage(driver);

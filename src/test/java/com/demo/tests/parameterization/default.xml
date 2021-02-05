@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestSuite" thread-count="2">
+
+<!--These errorMessages can be used on the suite level to pass in values for the suite-->
+    <parameter name="errorMessageEmail" value="We cannot find an account with that email address"/>
+    <parameter name="errorMessagePassword" value="Your password is incorrect"/>
+
+<!--#1 *********************************************************************-->
+    <test name="testInvalidUserLoginGetsErrorMessage(Invalid Email Type1)">
+
+        <parameter name="invalid_email" value="invalid@email.io"/>
+
+        <classes>
+            <class name="com.demo.tests.login.TestInvalidUser">
+                <methods>
+                    <include name="testInvalidUserLoginGetsErrorMessage" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--#2 *******************************************************************-->
+    <test name="testInvalidUserLoginGetsErrorMessage(Invalid Email Type2)">
+
+        <parameter name="invalid_email" value="anotherinvalid@email.test"/>
+
+        <classes>
+            <class name="com.demo.tests.login.TestInvalidUser">
+                <methods>
+                    <include name="testInvalidUserLoginGetsErrorMessage" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--#3 *******************************************************************-->
+    <test name="testInvalidUserPasswordGetsErrorMessage(Invalid Password)">
+
+        <parameter name="valid_email" value="999test@gmail.com"/>
+        <parameter name="invalid_password" value="invalid007"/>
+        <parameter name="errorMessagePassword" value="Your password is incorrect"/>
+
+        <classes>
+            <class name="com.demo.tests.login.TestInvalidUser">
+                <methods>
+                    <include name="testInvalidUserPasswordGetsErrorMessage" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--#4 *******************************************************************-->
+    <test name="testInvalidUserPasswordGetsErrorMessage(Uppercase letter password))">
+
+        <parameter name="valid_email" value="999test@gmail.com"/>
+        <parameter name="invalid_password" value="ABCD1234"/>
+        <parameter name="errorMessagePassword" value="Your password is incorrect"/>
+
+        <classes>
+            <class name="com.demo.tests.login.TestInvalidUser">
+                <methods>
+                    <include name="testInvalidUserPasswordGetsErrorMessage" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite> <!-- Suite -->
