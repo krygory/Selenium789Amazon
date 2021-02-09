@@ -1,5 +1,6 @@
 package com.demo.tests.base;
 
+import com.demo.pages.BrokenLinks;
 import com.demo.pages.LandingPage;
 import com.demo.pages.LoginPage;
 import com.demo.tests.enums.FinalValues;
@@ -15,6 +16,7 @@ public class BaseTest {
 
     protected LoginPage loginPage;
     protected LandingPage landingPage;
+    protected BrokenLinks brokenLinks;
 
     @BeforeClass
     public void setUp () {
@@ -25,6 +27,7 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         landingPage = new LandingPage(driver);
+        brokenLinks = new BrokenLinks(driver);
     }
 
     @AfterClass
